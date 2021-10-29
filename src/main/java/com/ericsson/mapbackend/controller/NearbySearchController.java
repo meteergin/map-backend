@@ -20,7 +20,6 @@ import java.util.*;
 @RequiredArgsConstructor
 public class NearbySearchController {
 
-    private final RestTemplate restTemplate;
     private final NearbySearchService nearbySearchService;
 
     @Value("${google.api_key}")
@@ -63,7 +62,12 @@ public class NearbySearchController {
                 apiKey);
 
         try {
-            ResponseEntity<NearbySearchResult> responseEntity = restTemplate.getForEntity(url, NearbySearchResult.class);
+            ResponseEntity<NearbySearchResult> responseEntity = nearbySearchService.googlePlacesAPICall(url);
+
+            if(null == responseEntity || null == responseEntity.getBody()){
+                throw new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, "Nearby search result not found.");
+            }
 
             List<Result> resultList = responseEntity.getBody().getResults();
             if (!resultList.isEmpty()) {
