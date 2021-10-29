@@ -7,7 +7,7 @@ search request via Google Places API and return the result as response. The API 
 
 API accepts GET requests as REST API on port 8070. For example;
 ```bash
-http://localhost:8070/search/nearbysearch?latitude=-33.8670522&longitude=151.1957362&radius=200
+curl http://localhost:8070/search/nearbysearch?latitude=-33.8670522&longitude=151.1957362&radius=200
 ```
 The responses from the Google Places API are recorded and if the same request comes again, the response is returned from the DB without the need to make the same query to the Google Places API again.
 

@@ -2,7 +2,6 @@ package com.ericsson.mapbackend.controller;
 
 import com.ericsson.mapbackend.api.nearbysearch.NearbySearchResult;
 import com.ericsson.mapbackend.api.nearbysearch.Result;
-import com.ericsson.mapbackend.dto.NearbySearchRequestDto;
 import com.ericsson.mapbackend.dto.NearbySearchResponseDto;
 import com.ericsson.mapbackend.entity.NearbySearch;
 import com.ericsson.mapbackend.exception.NearbySearchNotFoundException;
@@ -10,7 +9,6 @@ import com.ericsson.mapbackend.service.NearbySearchService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.server.ResponseStatusException;
@@ -36,6 +34,8 @@ public class NearbySearchController {
 
         List<NearbySearchResponseDto> responseList = new ArrayList<>();
 
+        // Check if the same request has been made before.
+        // If the returned list is full as a result of the database query, return the list without querying the REST API.
         List<NearbySearch> searchList = nearbySearchService.findBySearchedLatitudeAndSearchedLongitudeAndRadius(latitude, longitude, radius);
 
         if (!searchList.isEmpty()) {
@@ -54,6 +54,7 @@ public class NearbySearchController {
             return responseList;
         }
 
+        // If the returned list is empty as a result of the database query, query to the REST API, save the response to the database.
         String url = String.format(
                 "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=%f,%f&radius=%d&key=%s",
                 latitude,
