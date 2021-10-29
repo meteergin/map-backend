@@ -31,3 +31,12 @@ Under target directory run;
 ```bash
 java -jar map-backend-0.0.1-SNAPSHOT.jar
 ```
+
+## Architectural Design
+![alt text](img/architectural_design.png)
+
+## Database Model
+![alt text](img/db_model.png)
+
+## Solution Desgin
+![alt text](img/solution_design.png)
