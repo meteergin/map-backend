@@ -14,3 +14,5 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     properties:
       hibernate.format_sql: true
+google:
+  api_key: AIzaSyB3goBXF4AVFqunFnMZ5i6UVO9RPlyR4is

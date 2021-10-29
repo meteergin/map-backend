@@ -16,7 +16,7 @@ public class NearbySearchService {
         return nearbySearchRepository.findBySearchedLatitudeAndSearchedLongitudeAndRadius(searchedLatitude, searchedLongitude, radius);
     }
 
-    public NearbySearch save(NearbySearch nearbySearch){
+    public NearbySearch save(NearbySearch nearbySearch) {
         return nearbySearchRepository.save(nearbySearch);
     }
 }

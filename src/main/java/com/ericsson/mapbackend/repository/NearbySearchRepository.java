@@ -8,5 +8,8 @@ import java.util.List;
 
 @Repository
 public interface NearbySearchRepository extends JpaRepository<NearbySearch, Long> {
-    public List<NearbySearch> findBySearchedLatitudeAndSearchedLongitudeAndRadius(double searchedLatitude, double searchedLongitude, int radius);
+    List<NearbySearch> findBySearchedLatitudeAndSearchedLongitudeAndRadius(
+            double searchedLatitude,
+            double searchedLongitude,
+            int radius);
 }
