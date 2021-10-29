@@ -10,6 +10,7 @@ import com.ericsson.mapbackend.service.NearbySearchService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.server.ResponseStatusException;
@@ -27,12 +28,12 @@ public class NearbySearchController {
     @Value("${google.api_key}")
     private String apiKey;
 
-    @PostMapping("/nearbysearch")
-    public List<NearbySearchResponseDto> getNearbySearch(@RequestBody NearbySearchRequestDto nearbySearchRequestDto) {
+    @GetMapping("/nearbysearch")
+    public List<NearbySearchResponseDto> getNearbySearch(
+            @RequestParam(required = true) double latitude,
+            @RequestParam(required = true) double longitude,
+            @RequestParam(required = true) int radius) {
 
-        double latitude = nearbySearchRequestDto.getLatitude();
-        double longitude = nearbySearchRequestDto.getLongitude();
-        int radius = nearbySearchRequestDto.getRadius();
         List<NearbySearchResponseDto> responseList = new ArrayList<>();
 
         List<NearbySearch> searchList = nearbySearchService.findBySearchedLatitudeAndSearchedLongitudeAndRadius(latitude, longitude, radius);
