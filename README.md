@@ -38,5 +38,5 @@ java -jar map-backend-0.0.1-SNAPSHOT.jar
 ## Database Model
 ![alt text](img/db_model.png)
 
-## Solution Desgin
+## Solution Design
 ![alt text](img/solution_design.png)
